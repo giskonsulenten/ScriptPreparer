@@ -313,7 +313,7 @@
      </font>
     </property>
     <property name="text">
-     <string>http://data.geus.dk/geusmap/ows/25832.jsp</string>
+     <string>http://arealinformation.miljoeportal.dk/gis/services/public/MapServer/WFSServer</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushbuttonGetLayers">

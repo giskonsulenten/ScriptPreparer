@@ -242,7 +242,7 @@ class ScriptPreparer:
             
         # Select existing fgdb files
         if self.dlg.comboBox.currentIndex()==3:
-            self.dlg.filePathDataStore.setText('Pick a directory for shape files')
+            self.dlg.filePathDataStore.setText('Pick a esri File geodatabase')
             filename = str(QFileDialog.getExistingDirectory(self.dlg, "Select database folder"))
             self.dlg.filePathDataStore.setText(filename)
             outputPath, outputFilename = os.path.split(self.dlg.filePathDataStore.text())
@@ -304,7 +304,7 @@ class ScriptPreparer:
             try:
                 for item in self.dlg.listWidget.selectedItems():
                     self.dlg.listWidget_2.addItem(item.text())
-                    selectedLayers.append('ogr2ogr -update -overwrite -skipfailures ' + self.dlg.connectionString.text() + ' -spat '
+                    selectedLayers.append('ogr2ogr -update -overwrite ' + self.dlg.connectionString.text() + ' -spat '
                      + self.dlg.envelopeCoords.text() + ' "' + 'WFS:' + self.dlg.wfsURL.text() + '" ' + item.text() + ' -nln ' + item.text().replace(":","_") + ' -t_srs "' + self.dlg.refSystem.text() + '"')
                  
                 self.dlg.listWidget_2.addItem('')
@@ -324,11 +324,11 @@ class ScriptPreparer:
         
             if osSystem == 'Windows':
                 if platform.architecture()[0] == '64bit':
-                    f.write('c:\OSGeo4W64\bin\o4W_env.bat' + '\n')
+                    f.write('CALL C:\OSGeo4W64\\bin\o4W_env.bat' + '\n')
                     f.write(outputPath[:2] + '\n')
                     f.write('cd ' + outputPath[2:] + '\n')
                 if platform.architecture()[0] == '32bit':
-                    f.write('c:\OSGeo4W\bin\o4W_env.bat' + '\n')
+                    f.write('CALL C:\OSGeo4W\\bin\o4W_env.bat' + '\n')
                     f.write(outputPath[:2] + '\n')
                     f.write('cd ' + outputPath[2:] + '\n')
             else:
