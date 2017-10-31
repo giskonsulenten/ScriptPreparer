@@ -17,7 +17,7 @@ email=jesper@giskonsulenten.dk
 about=This plugin prepares ogr2ogr script from selected wfs layers and map extent
 
 tracker=github.com
-repository=https://github.com/giskonsulenten/QgisPlugins/ScriptPreparer
+repository=https://github.com/giskonsulenten/ScriptPreparer
 # End of mandatory metadata
 
 # Recommended items:
