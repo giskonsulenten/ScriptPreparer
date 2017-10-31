@@ -242,9 +242,8 @@ class ScriptPreparer:
             
         # Select existing fgdb files
         if self.dlg.comboBox.currentIndex()==3:
-            Fdlg = QFileDialog()
-            Fdlg.setFileMode(QFileDialog.ExistingFile)
-            filename = str(Fdlg.getOpenFileName(self.dlg, "Select database file","", '*.gdb'))
+            self.dlg.filePathDataStore.setText('Pick a directory for shape files')
+            filename = str(QFileDialog.getExistingDirectory(self.dlg, "Select database folder"))
             self.dlg.filePathDataStore.setText(filename)
             outputPath, outputFilename = os.path.split(self.dlg.filePathDataStore.text())
             self.dlg.connectionString.setText('-f \"FileGDB\" ' + outputFilename)
