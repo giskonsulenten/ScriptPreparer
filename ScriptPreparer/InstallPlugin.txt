@@ -1,0 +1,12 @@
+To install this plugin:
+
+Copy the entire folder "ScriptPreparer" into your personal Qgis Plugin folder:
+
+    /Users/you/.qgis2/python/plugins/
+    
+Remember to activate the plugin in Qgis - Plugins menu
+
+
+Have fun
+
+/Jesper
