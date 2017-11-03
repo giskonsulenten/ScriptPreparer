@@ -319,7 +319,7 @@ class ScriptPreparer:
             dialogText = "No layers selected in Layers"
             QMessageBox.critical(None,"Error", str(dialogText))
 
-        if self.dlg.scriptFile.text()!= 'Path to script file' and len(self.dlg.scriptFile.text()) > 0:
+        if self.dlg.scriptFile.text()!= 'Path to script file' and len(self.dlg.scriptFile.text()) > 0 and len(selectedLayers)>0:
             f = open(self.dlg.scriptFile.text(),'w')
         
             if osSystem == 'Windows':
