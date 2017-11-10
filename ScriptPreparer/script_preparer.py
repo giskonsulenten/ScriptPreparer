@@ -81,6 +81,7 @@ class ScriptPreparer:
         self.dlg.pushButtonDataStore.clicked.connect(self.DataStore)
         self.dlg.comboBox.currentIndexChanged.connect(self.dataFormat)
         self.dlg.outputFile.clicked.connect(self.outputFile)
+        self.dlg.exitButton.clicked.connect(self.exitPlugin)
         
 
     # noinspection PyMethodMayBeStatic
@@ -188,8 +189,8 @@ class ScriptPreparer:
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
         for action in self.actions:
-            self.iface.removePluginMenu(
-                self.tr(u'&Script Preparer'),
+            self.iface.removePluginVectorMenu(
+            self.tr(u'&Script Preparer'),
                 action)
             self.iface.removeToolBarIcon(action)
         # remove the toolbar
@@ -324,10 +325,16 @@ class ScriptPreparer:
         
             if osSystem == 'Windows':
                 if platform.architecture()[0] == '64bit':
+                    #if os.path.isfile("C:\\OSGeo4W64\\bin\\o4w_env.bat")=='True': 
                     f.write('CALL C:\OSGeo4W64\\bin\o4W_env.bat' + '\n')
                     f.write(outputPath[:2] + '\n')
                     f.write('cd ' + outputPath[2:] + '\n')
+                    #elif os.path.isfile("C:\\OSGeo4W\\bin\\o4W_env.bat")=='True':
+                    f.write('CALL C:\OSGeo4W\\bin\o4W_env.bat' + '\n')
+                    f.write(outputPath[:2] + '\n')
+                    f.write('cd ' + outputPath[2:] + '\n')
                 if platform.architecture()[0] == '32bit':
+                    #if os.path.isfile('C:\OSGeo4W\bin\o4W_env.bat'):
                     f.write('CALL C:\OSGeo4W\\bin\o4W_env.bat' + '\n')
                     f.write(outputPath[:2] + '\n')
                     f.write('cd ' + outputPath[2:] + '\n')
@@ -350,6 +357,26 @@ class ScriptPreparer:
         if fileWritten=='True':
             dialogText = "Script is ready"
             QMessageBox.information(None, "Info", str(dialogText))
+            
+    def exitPlugin(self):
+        self.dlg.listWidget_2.clear()
+        self.dlg.comboBox.setCurrentIndex(0)
+        self.dlg.filePathDataStore.setText('Pick a directory for shape files')
+        self.dlg.connectionString.setText("")
+        self.dlg.listWidget.clear()
+        selectedLayers=[]
+        self.dlg.scriptFile.setText('Path to script file')
+        self.dlg.envelopeCoords.setText("Push 'Area Of Interest' to set area of interest from map window")
+        self.dlg.wfsURL.setText('http://arealinformation.miljoeportal.dk/gis/services/public/MapServer/WFSServer')        
+        self.dlg.refSystem.setText('EPSG:25832')
+        self.dlg.close()
+        """Removes the plugin menu item and icon from QGIS GUI."""
+        for action in self.actions:
+            self.iface.removePluginVectorMenu(
+            self.tr(u'&Script Preparer'),
+                action)
+            self.iface.removeToolBarIcon(action)
+
 
         
     def run(self):
